@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title: Yet Another Union Find Implementation
 ---
 
