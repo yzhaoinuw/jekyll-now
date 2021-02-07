@@ -4,7 +4,7 @@ comments: true
 title: Yet Another Union Find Implementation
 ---
 
-In this post I would like to show an alternative implementation of [Union Find (aka Disjoint Set)](https://en.wikipedia.org/wiki/Disjoint-set_data_structure) that uses variable reference, which is an interesting concept explained vividly in this [SO post](https://stackoverflow.com/questions/986006/how-do-i-pass-a-variable-by-reference). The idea is to represent the subset representative as a dictionary, so that during a merge when we update the subset representative of any member in the subset, all the other members in that subset sync the update. One advantage of this implementation is that we don't need a Find function to trace the root of the subset representative, because the members in the same subset always have the same representative. The setup of the graph consists two classes: Node and Graph. A graph is made of node, and it also keeps track of all the edges. A node needs to keep track of two things: its subset representative and whether it has been merged into a subset or not. The subset representative of a node is initialized as itself. 
+In this post I would like to show an alternative implementation of [Union Find (aka Disjoint Set)](https://en.wikipedia.org/wiki/Disjoint-set_data_structure) that uses variable reference, which is an interesting concept explained vividly in this [SO post](https://stackoverflow.com/questions/986006/how-do-i-pass-a-variable-by-reference). The idea is to represent the subset representative as a dictionary, so that during a merge when we update the subset representative of any member in the subset, all the other members in that subset sync with the update. One advantage of this implementation is that we don't need a Find function to trace the root of the subset representative, because the members in the same subset always have the same representative. The setup of the graph consists two classes: Node and Graph. A graph is made of node, and it also keeps track of all the edges. The graph is undirected and does not contain self loops. A node needs to keep track of two things: its subset representative and whether it has been merged into a subset or not. The subset representative of a node is initialized as itself. 
 
 ```python
 class Node():
@@ -63,7 +63,7 @@ When checking a graph is cyclic or not, we loop through all the edges in the gra
             y.merged = True
 ```
 
-When the node has been merged, it means that there are other nodes that sync the subset representative of this node. So, we need to change the 'root' value of its subset representative to that of the other node. This corresponds to 
+When the node has been merged, it means that there are other nodes that sync with the subset representative of this node. So, we need to change the 'root' value of its subset representative to that of the other node. This corresponds to 
 ```python
 y.subset['root'] = x.subset['root']
 ```
@@ -71,7 +71,7 @@ in the merge function. But if the node has never not been merged, we need to rea
 ```python
 y.subset = x.subset
 ```
-It's the key part of the implementation to get it right as when to change the "root" value of the subset representative and when to reassign it. Afterwards, remember to update the merged status of the node, and that's it. To test it on a graph:
+It's the key part of the implementation to determine when to change the "root" value of the subset representative and when to reassign the subset representative. Afterwards, we need to update the merged status of an unmerged node to "True", and that's the most of it. To test the implementation on a graph:
 ```python
 A = Graph()
 A.add_edge(1,2)
