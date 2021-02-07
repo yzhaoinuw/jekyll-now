@@ -4,12 +4,12 @@ title: About
 permalink: /about/
 ---
 
-Some information about you!
+I am a data scientist who specializes in NLP and text mining.
 
 ### More Information
 
-A place to include any other types of information that you'd like to include about yourself.
+I just learned how to host blogs.
 
 ### Contact me
 
-[email@domain.com](mailto:email@domain.com)
+[LinkedIn](https://www.linkedin.com/in/yuezhao-roc/)
