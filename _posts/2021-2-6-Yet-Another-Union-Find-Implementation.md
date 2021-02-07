@@ -63,15 +63,7 @@ When checking a graph is cyclic or not, we loop through all the edges in the gra
             y.merged = True
 ```
 
-When the node has been merged, it means that there are other nodes that sync with the subset representative of this node. So, we need to change the 'root' value of its subset representative to that of the other node. This corresponds to 
-```python
-y.subset['root'] = x.subset['root']
-```
-in the merge function. But if the node has never not been merged, we need to reassign its subset representative altogether to that of the other node, because we need to establish the sync. This corresponds to 
-```python
-y.subset = x.subset
-```
-It's the key part of the implementation to determine when to change the "root" value of the subset representative and when to reassign the subset representative. Afterwards, we need to update the merged status of an unmerged node to "True", and that's the most of it. To test the implementation on a graph:
+When the node has been merged, it means that there are other nodes that sync with the subset representative of this node. So, we need to change the 'root' value of its subset representative to that of the other node. This corresponds to `y.subset['root'] = x.subset['root']` in the merge function. But if the node has never not been merged, we need to reassign its subset representative altogether to that of the other node, because we need to establish the sync. This corresponds to `y.subset = x.subset`. It's the key part of the implementation to determine when to change the "root" value of the subset representative and when to reassign the subset representative. Afterwards, we need to update the merged status of an unmerged node to "True", and that's the most of it. To test the implementation on a graph:
 ```python
 A = Graph()
 A.add_edge(1,2)
