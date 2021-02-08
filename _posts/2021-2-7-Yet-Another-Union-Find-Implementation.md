@@ -1,10 +1,12 @@
 ---
 layout: post
 comments: true
+excerpt_separator: <!--more-->
 title: Yet Another Union Find Implementation
 ---
 
 In this post I would like to show an alternative implementation of [Union Find (aka Disjoint Set)](https://en.wikipedia.org/wiki/Disjoint-set_data_structure) that uses variable reference, which is an interesting concept explained vividly in this [SO post](https://stackoverflow.com/questions/986006/how-do-i-pass-a-variable-by-reference). The idea is to keep track of the subset of a node as a list, like so:
+<!--more-->
 ```python
 class Node():
     def __init__(self,node_name):
