@@ -13,14 +13,14 @@ class Node():
 When merging two nodes x and y, suppose x is being merged into y, then we first add the subset of x to the subset of y, and then reassign the subset of x to the subset of y. Whichever node has a smaller subset should be merged, which is equivalent to [Union by Size](https://en.wikipedia.org/wiki/Disjoint-set_data_structure#Merging_two_sets). This part can be implemented like this: 
 ```python
 def merge(x, y):
-if len(x.subset) < len(y.subset):
-    x.subset.extend(y.subset)
-    for node in y.subset:
-        node.subset = x.subset
-else:
-    y.subset.extend(x.subset)
-    for node in x.subset:
-        node.subset = y.subset
+    if len(x.subset) < len(y.subset):
+        x.subset.extend(y.subset)
+        for node in y.subset:
+	    node.subset = x.subset
+    else:
+        y.subset.extend(x.subset)
+        for node in x.subset:
+	    node.subset = y.subset
 ```
 The key part of merge is to modify the subset of a node **in place** if it has a larger subset, so that all the other nodes in the same subset will sync with the change because their subset refer to the same variable. On the other hand, we need to **reassign** the subset of a node if it is in the smaller subset, as well as reassign the subset of all the other nodes in the same subset. One advantage of this implementation is that we don't need a Find function to trace the subset representative, because the members in the same subset always sync with other's subset representative. Talking about subset representative, We can just make the first node in the subset list as the subset representative. The complete implementation is the following:
 ```python
