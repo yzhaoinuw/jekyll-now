@@ -1,10 +1,12 @@
 ---
 layout: post
 comments: true
+excerpt_separator: <!--more-->
 title: Tracing Depth First Search
 ---
 
 Here's a variation of the [Depth First Search](https://en.wikipedia.org/wiki/Depth-first_search) (DFS) that traces the path of the search.
+<!--more-->
 ```python
 class Node():
     def __init__(self,node_name):
@@ -44,7 +46,7 @@ class Graph():
         return tracks
 ```
 When you run it on a directed graph with a given start point, it returns all the paths DFS has searched. Each path terminates at a node which has no neighbors that have not been in the path. For example, starting from node 2 of the following graph, we get
-'''python
+```python
 A = Graph()
 A.add_edge(0,1)
 A.add_edge(0,4) 
